@@ -1,32 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}Vegan Menu{% endblock %}
+{% block title %}Nutrify{% endblock %}
 
 {% block content %}
-<div class="row align-items-center text-center text-lg-start">
-    <div class="col-lg-6">
-        <h1 class="fw-bold text-dark">BIENVENIDOS </h1>
-        <p class="text-muted mb-4">En este sitio web podrás encontrar <strong>recetas saludables y rutinas de ejercicio</strong>, consejos de nutrición 
-            y trucos para mantener una alimentación equilibrada. 
-            Descubre cómo preparar comidas deliciosas, fáciles y llenas de energía, 
-            adaptadas a tus gustos y necesidades.</p>
-        
-        <div class="d-flex justify-content-center justify-content-lg-start mt-4">
-            <div class="me-4">
-                <h6 class="fw-bold text-success mb-0">COMIDAS SALUDABLES </h6>
-                <small class="text-muted">Aqui podras encontrar una gran variedad de platillos equilibrados que te ayudarán a mantener una alimentación nutritiva sin sacrificar el sabor. 
-                    Nuestras recetas están diseñadas para diferentes objetivos: bajar de peso, ganar masa muscular o simplemente comer mejor cada día. </small>
-            </div>
-            <div>
-                <h6 class="fw-bold text-success mb-0">RUTINAS DE EJERCICIO</h6>
-                <small class="text-muted"> Complementa tu alimentación saludable con rutinas de ejercicio diseñadas para todos los niveles. 
-                    Aquí encontrarás entrenamientos que puedes realizar desde casa o en el gimnasio, sin necesidad de equipo especializado.</small>
-            </div>
-        </div>
-    </div>
+<div class="text-center mb-5">
+    <h1 class="fw-bold text-dark display-4">BIENVENIDOS</h1>
+    <p class="text-muted fs-5 mx-auto" style="max-width: 800px;">
+        En este sitio web podrás encontrar <strong>recetas saludables, rutinas de ejercicio</strong>, consejos de nutrición y trucos para mantener una alimentación equilibrada. Descubre cómo preparar comidas deliciosas, fáciles y llenas de energía, adaptadas a tus gustos y necesidades. Además, te ofrecemos rutinas de ejercicio personalizadas para ayudarte a fortalecer tu cuerpo, mejorar tu resistencia y alcanzar tus objetivos de salud de manera efectiva.
+    </p>
+</div>
 
-    <div class="col-lg-6 mt-4 mt-lg-0 text-center">
-        <img src="{{ url_for('static', filename='img/img1.jpg') }}" class="img-fluid rounded-3" alt="Vegetables">
+<div class="row justify-content-center text-center">
+    <div class="col-md-4 mb-4">
+        <img src="{{ url_for('static', filename='img/img1.jpg') }}" class="img-fluid rounded-4 shadow" alt="Comidas saludables">
+        <h5 class="fw-bold text-success mt-3">Comidas Saludables</h5>
+        <p class="text-muted small">
+            Encuentra una gran variedad de platillos equilibrados que te ayudarán a mantener una alimentación nutritiva sin sacrificar el sabor.
+        </p>
+    </div>
+    <div class="col-md-4 mb-4">
+        <img src="{{ url_for('static', filename='img/img2.jpg') }}" class="img-fluid rounded-4 shadow" alt="Rutinas de ejercicio">
+        <h5 class="fw-bold text-success mt-3">Rutinas de Ejercicio</h5>
+        <p class="text-muted small">
+            Complementa tu alimentación saludable con rutinas diseñadas para todos los niveles, realizables desde casa o el gimnasio.
+        </p>
+    </div>
+    <div class="col-md-4 mb-4">
+        <img src="{{ url_for('static', filename='img/img3.avif') }}" class="img-fluid rounded-4 shadow" alt="Nutrición y bienestar">
+        <h5 class="fw-bold text-success mt-3">Nutrición y Bienestar</h5>
+        <p class="text-muted small">
+            Aprende hábitos saludables, consejos de nutrición y formas de mantener un estilo de vida equilibrado y lleno de energía.
+        </p>
     </div>
 </div>
 {% endblock %}
