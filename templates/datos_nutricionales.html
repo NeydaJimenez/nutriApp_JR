@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Datos Nutricionales{% endblock %}
+{% block content %}
+
+<div class="text-center mb-5">
+    <h1 class="fw-bold text-success display-5">Datos Nutricionales</h1>
+    <p class="text-muted fs-5 mx-auto" style="max-width: 900px;">
+        Conoce los principales nutrientes y su función para mantener tu cuerpo saludable y en equilibrio.
+    </p>
+
+    <img src="{{ url_for('static', filename='img/nutrientes.jpg') }}" 
+         alt="Nutrientes saludables" 
+         class="img-fluid rounded-4 shadow my-4" 
+         style="max-height: 450px; object-fit: cover;">
+</div>
+
+<div class="container">
+    <div class="row justify-content-center g-4">
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Calorías</h5>
+                <img src="{{ url_for('static', filename='img/calorias.jpeg') }}" class="card-img-top rounded-top-4" alt="Calorías">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Las calorías proporcionan la energía necesaria para nuestras actividades diarias. Su requerimiento depende del sexo, la edad y la actividad física.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Proteínas</h5>
+                <img src="{{ url_for('static', filename='img/Proteínas.jpeg') }}" class="card-img-top rounded-top-4" alt="Proteínas">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Esenciales para el crecimiento y reparación de tejidos. Se encuentran en carnes, huevos, pescados y legumbres.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Carbohidratos</h5>
+                <img src="{{ url_for('static', filename='img/carbo.jpeg') }}" class="card-img-top rounded-top-4" alt="Carbohidratos">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Fuente principal de energía. Deben representar entre el 45% y 65% de las calorías diarias, preferiblemente complejos como granos enteros.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Grasas</h5>
+                <img src="{{ url_for('static', filename='img/Grasas.jpg') }}" class="card-img-top rounded-top-4" alt="Grasas">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Importantes para la salud celular y absorción de vitaminas. Prioriza grasas saludables como aceite de oliva, frutos secos y aguacates.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Fibra</h5>
+                <img src="{{ url_for('static', filename='img/fibras.jpeg') }}" class="card-img-top rounded-top-4" alt="Fibra">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Favorece la digestión y previene enfermedades. Presente en frutas, verduras y granos enteros.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Vitaminas y Minerales</h5>
+                <img src="{{ url_for('static', filename='img/minyvi.jpeg') }}" class="card-img-top rounded-top-4" alt="Vitaminas y Minerales">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Claves para la inmunidad, salud ósea y metabolismo. Destacan la vitamina A, C, D, el calcio y el hierro.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Agua</h5>
+                <img src="{{ url_for('static', filename='img/agua.jpg') }}" class="card-img-top rounded-top-4" alt="Agua">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Fundamental para mantener la hidratación y funciones biológicas. Se recomienda beber de 2 a 3 litros diarios.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

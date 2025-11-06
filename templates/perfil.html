@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Perfil del Usuario{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h2 class="fw-bold text-success">Perfil del Usuario</h2>
+    <div class="card mt-4 mx-auto shadow-sm rounded-4" style="max-width: 700px;">
+        <div class="card-body text-start">
+            <h5 class="text-success fw-bold mb-3">Datos Personales</h5>
+            <p><strong>Nombre:</strong> {{ session['nombre'] }} {{ session['apellidos'] }}</p>
+            <p><strong>Edad:</strong> {{ session['edad'] }}</p>
+            <p><strong>Sexo:</strong> {{ session['sexo'] }}</p>
+            <p><strong>Peso:</strong> {{ session['peso'] }} kg</p>
+            <p><strong>Altura:</strong> {{ session['altura'] }} cm</p>
+            <p><strong>Nivel de actividad:</strong> {{ session['actividad'] }}</p>
+            <p><strong>Email:</strong> {{ session['email'] }}</p>
+
+            <hr>
+
+            <h5 class="text-success fw-bold mb-3">Objetivo</h5>
+            <p>{{ session['objetivo'] }}</p>
+
+            <h5 class="text-success fw-bold mb-3">Preferencias y Restricciones</h5>
+            <p><strong>Alergias:</strong> {{ session['alergias'] }}</p>
+            <p><strong>Intolerancias:</strong> {{ session['intolerancias'] }}</p>
+            <p><strong>Tipo de dieta:</strong> {{ session['dieta'] }}</p>
+            <p><strong>Alimentos que no le gustan:</strong> {{ session['no_gusta'] }}</p>
+
+            <h5 class="text-success fw-bold mb-3">Nivel de experiencia</h5>
+            <p>{{ session['experiencia'] }}</p>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Cerrar Sesión</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

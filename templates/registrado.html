@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Registro - Nutrify{% endblock %}
+{% block content %}
+<h2 class="text-center text-success fw-bold mb-4">Registro de Perfil</h2>
+
+<form method="POST" class="bg-white p-4 rounded-4 shadow-sm mx-auto" style="max-width: 800px;">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Apellidos</label>
+            <input type="text" name="apellidos" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label class="form-label">Edad</label>
+            <input type="number" name="edad" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Sexo</label>
+            <select name="sexo" class="form-select" required>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Nivel de actividad</label>
+            <select name="actividad" class="form-select" required>
+                <option value="Sedentario">Sedentario</option>
+                <option value="Moderado">Moderado</option>
+                <option value="Activo">Activo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Peso (kg)</label>
+            <input type="number" name="peso" step="0.1" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Altura (cm)</label>
+            <input type="number" name="altura" step="0.1" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Contraseña</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <h5 class="text-success fw-bold">Objetivos</h5>
+    <select name="objetivo" class="form-select mb-3" required>
+        <option value="Bajar de peso">Bajar de peso</option>
+        <option value="Aumentar masa muscular">Aumentar masa muscular</option>
+        <option value="Mantener peso">Mantener peso</option>
+        <option value="Mejorar digestión">Mejorar digestión</option>
+        <option value="Controlar una condición">Controlar una condición (diabetes, hipertensión)</option>
+    </select>
+
+    <h5 class="text-success fw-bold">Preferencias y Restricciones</h5>
+    <div class="mb-3">
+        <label class="form-label">Alergias</label>
+        <input type="text" name="alergias" class="form-control" placeholder="Ejemplo: maní, mariscos">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Intolerancias</label>
+        <input type="text" name="intolerancias" class="form-control" placeholder="Ejemplo: lactosa, gluten">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tipo de dieta</label>
+        <select name="dieta" class="form-select">
+            <option value="Ninguna">Ninguna</option>
+            <option value="Vegana">Vegana</option>
+            <option value="Vegetariana">Vegetariana</option>
+            <option value="Keto">Keto</option>
+            <option value="Mediterránea">Mediterránea</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Alimentos que no te gustan</label>
+        <input type="text" name="no_gusta" class="form-control" placeholder="Ejemplo: cebolla, pescado">
+    </div>
+
+    <h5 class="text-success fw-bold">Nivel de Experiencia en Cocina</h5>
+    <select name="experiencia" class="form-select mb-4" required>
+        <option value="Principiante">Principiante</option>
+        <option value="Intermedio">Intermedio</option>
+        <option value="Chef aficionado">Chef aficionado</option>
+    </select>
+
+    <button class="btn btn-success w-100">Guardar Perfil</button>
+</form>
+{% endblock %}
