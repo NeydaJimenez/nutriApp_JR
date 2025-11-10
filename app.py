@@ -26,7 +26,7 @@ def registrado():
         session['no_gusta'] = request.form['no_gusta']
         session['experiencia'] = request.form['experiencia']
 
-        return redirect(url_for('perfil'))
+        return redirect(url_for('index'))
     return render_template('registrado.html')
 
 @app.route('/perfil')

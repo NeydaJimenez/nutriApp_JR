@@ -23,7 +23,9 @@
                     <li class="nav-item"><a class="nav-link text-white" href="#">Calculadora de...</a></li>
 
                     {% if 'nombre' in session %}
-                        <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('perfil') }}">Perfil</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url_for('perfil') }}">Perfil</a>
+                        </li>
                         <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('registrado') }}">Registrarse</a></li>
@@ -32,6 +34,14 @@
             </div>
         </div>
     </nav>
+
+    {% if 'nombre' in session %}
+        <div class="position-fixed top-0 end-0 m-3">
+            <span class="navbar-text text-white bg-success p-2 rounded-3">
+                Hola, {{ session['nombre'] }}
+            </span>
+        </div>
+    {% endif %}
 
     <div class="container my-5">
         {% block content %}{% endblock %}
