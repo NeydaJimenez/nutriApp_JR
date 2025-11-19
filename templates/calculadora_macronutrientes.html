@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Macronutrientes{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center">
+    <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%; border-radius: 15px;">
+
+        <div class="card-header bg-success bg-opacity-75 text-white text-center fw-bold"
+             style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+            Calculadora de Macronutrientes
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Calorías diarias</label>
+                    <input type="number" name="calorias" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Objetivo</label>
+                    <select name="objetivo" class="form-select" required>
+                        <option value="perder">Pérdida de peso</option>
+                        <option value="mantener">Mantener peso</option>
+                        <option value="ganar">Ganar masa muscular</option>
+                    </select>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-success px-4">Calcular</button>
+                </div>
+
+            </form>
+
+            {% if resultado %}
+            <div class="mt-4 card bg-success bg-opacity-25 border-0 p-3">
+                <h5 class="text-success fw-bold text-center">Resultado:</h5>
+                <p class="text-center fs-5">{{ resultado }}</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
