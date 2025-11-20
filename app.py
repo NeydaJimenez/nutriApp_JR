@@ -10,21 +10,14 @@ def index():
 @app.route('/registrado', methods=['GET', 'POST'])
 def registrado():
     if request.method == 'POST':
-        session['nombre'] = request.form['nombre']
-        session['apellidos'] = request.form['apellidos']
-        session['edad'] = request.form['edad']
-        session['sexo'] = request.form['sexo']
-        session['peso'] = request.form['peso']
-        session['altura'] = request.form['altura']
-        session['actividad'] = request.form['actividad']
-        session['email'] = request.form['email']
-        session['password'] = request.form['password']
-        session['objetivo'] = request.form['objetivo']
-        session['alergias'] = request.form['alergias']
-        session['intolerancias'] = request.form['intolerancias']
-        session['dieta'] = request.form['dieta']
-        session['no_gusta'] = request.form['no_gusta']
-        session['experiencia'] = request.form['experiencia']
+        campos = [
+            'nombre','apellidos','edad','sexo','peso','altura','actividad',
+            'email','password','objetivo','alergias','intolerancias',
+            'dieta','no_gusta','experiencia'
+        ]
+
+        for campo in campos:
+            session[campo] = request.form.get(campo, "")
 
         return redirect(url_for('index'))
     return render_template('registrado.html')
@@ -49,82 +42,92 @@ def datos_nutricionales():
 def calculadora_imc():
     resultado = None
     if request.method == 'POST':
-        peso = float(request.form['peso'])
-        altura = float(request.form['altura']) / 100
-        imc = peso / (altura ** 2)
-        resultado = f"Tu IMC es {imc:.2f}"
-
+        try:
+            peso = float(request.form['peso'])
+            altura = float(request.form['altura']) / 100
+            imc = peso / (altura ** 2)
+            resultado = f"Tu IMC es {imc:.2f}"
+        except:
+            resultado = "Por favor llena todos los campos correctamente."
     return render_template('calculadora_IMC.html', resultado=resultado)
 
 @app.route('/calculadora/tmb', methods=['GET', 'POST'])
 def calculadora_tmb():
     resultado = None
     if request.method == 'POST':
-        edad = int(request.form['edad'])
-        sexo = request.form['sexo']
-        peso = float(request.form['peso'])
-        altura = float(request.form['altura'])
+        try:
+            edad = int(request.form['edad'])
+            sexo = request.form['sexo']
+            peso = float(request.form['peso'])
+            altura = float(request.form['altura'])
 
-        if sexo == "hombre":
-            tmb = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * edad)
-        else:
-            tmb = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * edad)
+            if sexo == "hombre":
+                tmb = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * edad)
+            else:
+                tmb = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * edad)
 
-        resultado = f"Tu TMB es {tmb:.2f} calorías/día"
-
+            resultado = f"Tu TMB es {tmb:.2f} calorías/día"
+        except:
+            resultado = "Completa correctamente todos los campos."
     return render_template('calculadora_TMB.html', resultado=resultado)
 
 @app.route('/calculadora/gct', methods=['GET', 'POST'])
 def calculadora_gct():
     resultado = None
     if request.method == 'POST':
-        tmb = float(request.form['tmb'])
-        actividad = float(request.form['actividad'])
-        gct = tmb * actividad
-        resultado = f"Tu gasto calórico total es {gct:.2f} calorías/día"
-
+        try:
+            tmb = float(request.form['tmb'])
+            actividad = float(request.form['actividad'])
+            gct = tmb * actividad
+            resultado = f"Tu gasto calórico total es {gct:.2f} calorías/día"
+        except:
+            resultado = "Completa los datos correctamente."
     return render_template('calculadora_GCT.html', resultado=resultado)
 
 @app.route('/calculadora/pesoideal', methods=['GET', 'POST'])
 def calculadora_pesoideal():
     resultado = None
     if request.method == 'POST':
-        altura = float(request.form['altura'])
-        sexo = request.form['sexo']
+        try:
+            altura = float(request.form['altura'])
+            sexo = request.form['sexo']
 
-        altura_m = altura / 2.54 
+            altura_m = altura / 2.54 
 
-        if sexo == "hombre":
-            ideal = 50 + 2.3 * (altura_m - 60)
-        else:
-            ideal = 45.5 + 2.3 * (altura_m - 60)
+            if sexo == "hombre":
+                ideal = 50 + 2.3 * (altura_m - 60)
+            else:
+                ideal = 45.5 + 2.3 * (altura_m - 60)
 
-        resultado = f"Tu peso ideal aproximado es {ideal:.2f} kg"
-
+            resultado = f"Tu peso ideal aproximado es {ideal:.2f} kg"
+        except:
+            resultado = "Llena los campos correctamente."
     return render_template('calculadora_pesoideal.html', resultado=resultado)
 
 @app.route('/calculadora/macronutrientes', methods=['GET', 'POST'])
 def calculadora_macronutrientes():
     resultado = None
-
     if request.method == 'POST':
-        calorias = float(request.form['calorias'])
-        objetivo = request.form['objetivo']
+        try:
+            calorias = float(request.form['calorias'])
+            objetivo = request.form['objetivo']
 
-        if objetivo == "perder":
-            p, g, c = 0.40, 0.30, 0.30
-        elif objetivo == "mantener":
-            p, g, c = 0.30, 0.30, 0.40
-        else:
-            p, g, c = 0.30, 0.25, 0.45
+            if objetivo == "perder":
+                p, g, c = 0.40, 0.30, 0.30
+            elif objetivo == "mantener":
+                p, g, c = 0.30, 0.30, 0.40
+            else:
+                p, g, c = 0.30, 0.25, 0.45
 
-        prot = calorias * p / 4
-        gras = calorias * g / 9
-        carb = calorias * c / 4
+            prot = calorias * p / 4
+            gras = calorias * g / 9
+            carb = calorias * c / 4
 
-        resultado = f"Proteínas: {prot:.0f} g | Grasas: {gras:.0f} g | Carbohidratos: {carb:.0f} g"
-
+            resultado = f"Proteínas: {prot:.0f} g | Grasas: {gras:.0f} g | Carbohidratos: {carb:.0f} g"
+        except:
+            resultado = "Ingresa un número válido."
     return render_template('calculadora_macronutrientes.html', resultado=resultado)
+
 
 
 @app.route('/analizador_recetas', methods=['GET', 'POST'])
@@ -153,7 +156,6 @@ def analizador_recetas():
         "Pescado": {"proteins": 20, "carbs": 0, "fats": 5},
     }
 
-    
     recipes = {
         "Discada": [
             "Carne de Res", "Tocino", "Papas", "Zanahorias", "Cebolla", "Pimientos", "Tomate", "Aceite de Oliva"
@@ -177,18 +179,31 @@ def analizador_recetas():
     total_fats = 0
     ingredient_data = []
     health_status = ""
+    recipe_name = None
 
     if request.method == 'POST':
-      
-        recipe_name = request.form['recipe']
+
+        recipe_name = request.form.get('recipe')
+
+       
+        quantities = request.form.getlist('quantities')
+        if not quantities or any(q.strip() == "" for q in quantities):
+            return render_template(
+                'analizador_recetas.html',
+                recipes=recipes,
+                recipe_name=recipe_name,
+                error="⚠️ Debes ingresar las cantidades antes de continuar."
+            )
 
         ingredients = recipes.get(recipe_name, [])
-       
-        
-        quantities = request.form.getlist('quantities')
 
         for ingredient, quantity in zip(ingredients, quantities):
-            quantity = float(quantity)
+
+            try:
+                quantity = float(quantity)
+            except:
+                quantity = 0
+
             if ingredient in food_data:
                 data = food_data[ingredient]
                 protein = (data['proteins'] * quantity) / 100
@@ -207,7 +222,11 @@ def analizador_recetas():
                 total_carbs += carbs
                 total_fats += fats
         
-        health_score = total_proteins / (total_carbs + total_fats)
+        try:
+            health_score = total_proteins / (total_carbs + total_fats)
+        except:
+            health_score = 0
+
         if health_score > 0.4:
             health_status = "¡Receta saludable!"
         elif health_score > 0.2:
@@ -215,13 +234,19 @@ def analizador_recetas():
         else:
             health_status = "Receta alta en carbohidratos/fats."
         
-        return render_template('analizador_recetas.html', ingredient_data=ingredient_data,
-                                total_proteins=round(total_proteins, 2),
-                                total_carbs=round(total_carbs, 2),
-                                total_fats=round(total_fats, 2),
-                                health_status=health_status, recipe_name=recipe_name)
+        return render_template('analizador_recetas.html',
+                               ingredient_data=ingredient_data,
+                               total_proteins=round(total_proteins, 2),
+                               total_carbs=round(total_carbs, 2),
+                               total_fats=round(total_fats, 2),
+                               health_status=health_status,
+                               recipe_name=recipe_name,
+                               recipes=recipes)
 
     return render_template('analizador_recetas.html', recipes=recipes)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
