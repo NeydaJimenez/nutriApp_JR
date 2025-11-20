@@ -1,50 +1,49 @@
 {% extends "base.html" %}
-{% block title %}Gasto Calórico Total{% endblock %}
+{% block title %}Calculadora GCT{% endblock %}
 
 {% block content %}
-<div class="container d-flex justify-content-center">
-    <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%; border-radius: 15px;">
-
-        <div class="card-header bg-success bg-opacity-75 text-white text-center fw-bold"
-             style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            Gasto Calórico Total
+<div class="container d-flex justify-content-center mt-4">
+    <div class="card shadow-lg border-0" style="max-width: 850px; width: 100%; border-radius: 15px;">
+        <div class="card-header bg-success text-white text-center fw-bold">
+            Calculadora de Gasto Calórico Total (GCT)
         </div>
 
-        <div class="card-body">
+        <div class="card-body px-5">
+            <p class="text-secondary">
+                El Gasto Calórico Total es la energía total que quemas al día considerando tu actividad física.
+            </p>
 
             <form method="POST">
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">TMB (cal)</label>
+                    <label class="form-label fw-semibold">TMB (calorías)</label>
                     <input type="number" step="0.1" name="tmb" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Actividad</label>
-                    <select name="actividad" class="form-select" required>
+                    <label class="form-label fw-semibold">Nivel de Actividad</label>
+                    <select name="actividad" class="form-select">
                         <option value="1.2">Sedentario</option>
-                        <option value="1.375">Ligero</option>
-                        <option value="1.55">Moderado</option>
-                        <option value="1.725">Intenso</option>
-                        <option value="1.9">Muy Intenso</option>
+                        <option value="1.375">Ligera</option>
+                        <option value="1.55">Moderada</option>
+                        <option value="1.725">Intensa</option>
+                        <option value="1.9">Muy intensa</option>
                     </select>
                 </div>
 
-                <div class="text-center">
-                    <button class="btn btn-success px-4">Calcular</button>
+                <div class="text-center mt-3">
+                    <button class="btn btn-success px-4">Calcular GCT</button>
                 </div>
-
             </form>
 
             {% if resultado %}
             <div class="mt-4 card bg-success bg-opacity-25 border-0 p-3">
-                <h5 class="text-success fw-bold text-center">Resultado:</h5>
+                <h5 class="text-success fw-bold text-center">Resultado</h5>
                 <p class="text-center fs-5">{{ resultado }}</p>
+                <p class="text-center text-secondary">{{ info }}</p>
             </div>
             {% endif %}
-
         </div>
-
     </div>
 </div>
 {% endblock %}

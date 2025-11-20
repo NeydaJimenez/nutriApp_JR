@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Analizador de Recetas</h1>
+
+  
+    <form method="POST">
+        <div class="mb-3">
+            <label for="recipe" class="form-label">Selecciona un Platillo</label>
+            <select class="form-control" name="recipe" required>
+                <option value="" disabled selected>Selecciona un platillo</option>
+                {% for recipe in recipes %}
+                    <option value="{{ recipe }}">{{ recipe }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="quantities" class="form-label">Cantidad (en gramos) por ingrediente</label>
+    
+            {% if request.method == 'GET' %}
+                <input type="text" class="form-control" name="quantities" placeholder="Ej. 100, 200, 50" required>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Añadir Ingredientes</button>
+    </form>
+
+    {% if ingredient_data %}
+        <h2 class="mt-5">Ingredientes Añadidos para {{ recipe_name }}</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Ingrediente</th>
+                    <th>Cantidad (g)</th>
+                    <th>Proteínas (g)</th>
+                    <th>Carbohidratos (g)</th>
+                    <th>Grasas (g)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in ingredient_data %}
+                    <tr>
+                        <td>{{ item.ingredient }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.protein }}</td>
+                        <td>{{ item.carbs }}</td>
+                        <td>{{ item.fats }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Análisis de la Receta</h3>
+        <p><strong>Proteínas Totales:</strong> {{ total_proteins }} g</p>
+        <p><strong>Carbohidratos Totales:</strong> {{ total_carbs }} g</p>
+        <p><strong>Grasas Totales:</strong> {{ total_fats }} g</p>
+        <p><strong>Evaluación de la Receta:</strong> {{ health_status }}</p>
+    {% endif %}
+{% endblock %}

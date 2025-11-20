@@ -7,11 +7,6 @@
     <p class="text-muted fs-5 mx-auto" style="max-width: 900px;">
         Conoce los principales nutrientes y su función para mantener tu cuerpo saludable y en equilibrio.
     </p>
-
-    <img src="{{ url_for('static', filename='img/nutrientes.jpg') }}" 
-         alt="Nutrientes saludables" 
-         class="img-fluid rounded-4 shadow my-4" 
-         style="max-height: 450px; object-fit: cover;">
 </div>
 
 <div class="container">
@@ -97,6 +92,76 @@
                     <p class="card-text text-dark">
                         Fundamental para mantener la hidratación y funciones biológicas. Se recomienda beber de 2 a 3 litros diarios.
                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-5">
+            <h1 class="fw-bold text-success display-5">Educacion o Informacion</h1>
+            <p class="text-muted fs-5 mx-auto" style="max-width: 900px;">
+                Conoce cosas interesantes sobre la nutrcion.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Cómo leer las etiquetas nutricionales</h5>
+                <img src="{{ url_for('static', filename='img/etiqueta.webp') }}" class="card-img-top rounded-top" alt="Etiqueta Nutricional">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        <strong>a) Tamaño de porción</strong><br>Es lo primero que debes revisar. Todos los valores se basan en esa porción, no en todo el paquete. Un error común es pensar que todo el empaque equivale a una porción.<br><br>
+                        <strong>b) Calorías</strong><br>Indican la energía que aporta una porción. Revisa cuántas calorías consumirás realmente según lo que vayas a comer.<br><br>
+                        <strong>c) Nutrientes a limitar</strong><br>Busca que sean bajos:<ul><li>Grasas saturadas</li><li>Grasas trans</li><li>Sodio</li><li>Azúcares añadidos</li></ul><strong>Regla general:</strong><br>Bajo: 5% o menos del %VD<br>Alto: 20% o más del %VD<br><br>
+                        <strong>d) Nutrientes a priorizar</strong><br>Busca que sean altos:<ul><li>Fibra</li><li>Proteína</li><li>Vitaminas y minerales como calcio, hierro y potasio</li></ul><br>
+                        <strong>e) Lista de ingredientes</strong><br>Están ordenados de mayor a menor cantidad. Si los primeros ingredientes son azúcar, aceite o harinas refinadas, no es un buen indicador. Busca etiquetas cortas con ingredientes reconocibles.
+                    </p>
+                </div>
+            </div>
+        </div>        
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Mitos y verdades sobre las dietas de moda</h5>
+                <img src="{{ url_for('static', filename='img/Mitos y Verdades .png') }}" class="card-img-top rounded-top-4" alt="Etiqueta">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        <strong>Mito 1: “Las dietas detox limpian el cuerpo.”</strong><br><strong>Verdad:</strong> El cuerpo ya tiene órganos que desintoxican (hígado, riñones, piel). Los jugos detox no “limpian”, solo aportan líquidos y vitaminas.<br><br>
+                        <strong>Mito 2: “Los carbohidratos engordan.”</strong><br><strong>Verdad:</strong> Los carbohidratos no son enemigos. El exceso de calorías de cualquier fuente es lo que aumenta grasa corporal. Los carbohidratos complejos son esenciales.<br><br>
+                        <strong>Mito 3: “La dieta keto es para todos.”</strong><br><strong>Verdad:</strong> Puede servir en algunos casos, pero no es para cualquier persona. Puede causar efectos secundarios y no es sostenible para muchos.<br><br>
+                        <strong>Mito 4: “Mientras sea sin azúcar, es saludable.”</strong><br><strong>Verdad:</strong> Muchos productos “sin azúcar” tienen edulcorantes, grasas o sodio en exceso.<br><br>
+                        <strong>Mito 5: “Comer de noche engorda.”</strong><br><strong>Verdad:</strong> No es la hora, sino el exceso calórico total del día. Aunque comer muy tarde puede afectar sueño y digestión.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">Guías sobre macronutrientes y su función.</h5>
+                <img src="{{ url_for('static', filename='img/macro.jpg') }}" class="card-img-top rounded-top-4" alt="Etiqueta">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        Los macronutrientes aportan energía y cumplen funciones vitales:<br><br>
+                        <strong>a) Carbohidratos</strong><br><strong>Función:</strong><br>Fuente principal de energía. Necesarios para el cerebro y músculos.<br><strong>Fuentes saludables:</strong> Avena, frutas, verduras, arroz integral, quinoa, legumbres.<br><br>
+                        <strong>b) Proteínas</strong><br><strong>Función:</strong><br>Reparar y formar tejidos (músculos, piel, órganos). Importantes para el sistema inmune.<br><strong>Fuentes saludables:</strong> Huevos, pescado, pollo, legumbres, tofu, lácteos, frutos secos.<br><br>
+                        <strong>c) Grasas</strong><br><strong>Función:</strong><br>Absorción de vitaminas (A, D, E, K). Control hormonal y salud del cerebro.<br><strong>Fuentes saludables:</strong> Aguacate, aceite de oliva, semillas, frutos secos, pescado azul.<br><br><strong>Proporciones recomendadas</strong> (pueden variar según persona):<br>Carbohidratos: 45–60%<br>Proteínas: 10–35%<br>Grasas: 20–35%
+                    </p>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light shadow-sm border-0 rounded-4" style="width: 18rem;">
+                <h5 class="card-title text-success fw-bold text-center mt-3">La importancia de la hidratación, la fibra, etc.</h5>
+                <img src="{{ url_for('static', filename='img/importancia.png') }}" class="card-img-top rounded-top-4" alt="Etiqueta">
+                <div class="card-body">
+                    <p class="card-text text-dark">
+                        <strong>Hidratación</strong><br>El cuerpo es 60% agua. Regula temperatura, digestión, circulación y transporte de nutrientes.<br><strong>Recomendación general:</strong> 2–3 litros/día, más si haces ejercicio.<br><br>
+                        <strong>Fibra</strong><br><strong>Beneficios:</strong><br>Mejora la digestión.<br>Regula el azúcar en sangre.<br>Aumenta la saciedad.<br>Reduce el colesterol.<br><strong>Fuentes:</strong> frutas, verduras, cereales integrales, legumbres, frutos secos.<br><br>
+                        <strong>Consumo recomendado:</strong><br>Mujeres: 25 g/día<br>Hombres: 30–38 g/día<br><br>
+                        <strong>Micronutrientes importantes</strong><br>Calcio: huesos, músculos.<br>Hierro: transporte de oxígeno.<br>Potasio: equilibrio de líquidos y presión arterial.<br>Magnesio: función muscular y nerviosa.<br><br>
+                        <strong>Otros factores clave para una dieta saludable</strong><br>Comer variedad y colores.<br>Minimizar ultraprocesados.<br>Controlar porciones sin obsesión.<br>Mantener horarios regulares.
+                    </p>                                      
                 </div>
             </div>
         </div>

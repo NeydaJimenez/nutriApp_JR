@@ -17,50 +17,22 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ url_for('index') }}">Inicio</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ url_for('datos_nutricionales') }}">Datos Nutricionales</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Analizador de Recetas</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Rutinas</a>
-                    </li>
-
+                    <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('index') }}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('datos_nutricionales') }}">Datos Nutricionales</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('analizador_recetas') }}">Analizador de Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Rutinas</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="calcDropdown" role="button" data-bs-toggle="dropdown">
-                            Calculadoras
-                        </a>
-
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="calcDropdown" role="button" data-bs-toggle="dropdown">Calculadoras</a>
                         <ul class="dropdown-menu">
-
-                            <li>
-                                <a class="dropdown-item" href="{{ url_for('calculadora_imc') }}">IMC</a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="{{ url_for('calculadora_tmb') }}">TMB</a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="{{ url_for('calculadora_gct') }}">Gasto Calórico Total</a>
-                            </li>
-
+                            <li><a class="dropdown-item" href="{{ url_for('calculadora_imc') }}">IMC</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('calculadora_tmb') }}">TMB</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('calculadora_gct') }}">Gasto Calórico Total</a></li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('calculadora_pesoideal') }}">Peso Ideal</a>
                             </li>
-
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('calculadora_macronutrientes') }}">Macronutrientes</a>
                             </li>
-
                         </ul>
                     </li>
 
@@ -78,7 +50,6 @@
                             <a class="nav-link text-white" href="{{ url_for('registrado') }}">Registrarse</a>
                         </li>
                     {% endif %}
-
                 </ul>
             </div>
         </div>

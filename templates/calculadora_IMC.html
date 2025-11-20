@@ -1,20 +1,20 @@
 {% extends "base.html" %}
-{% block title %}IMC{% endblock %}
+{% block title %}Calculadora IMC{% endblock %}
 
 {% block content %}
-
-<div class="container d-flex justify-content-center">
-    <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%; border-radius: 15px;">
-
-        <div class="card-header bg-success bg-opacity-75 text-white text-center fw-bold"
-             style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            Calculadora IMC
+<div class="container d-flex justify-content-center mt-4">
+    <div class="card shadow-lg border-0" style="max-width: 850px; width: 100%; border-radius: 15px;">
+        <div class="card-header bg-success text-white text-center fw-bold">
+            Calculadora de IMC
         </div>
 
-        <div class="card-body">
+        <div class="card-body px-5">
+            <p class="text-secondary">
+                El Índice de Masa Corporal (IMC) es una medida que relaciona el peso y la altura
+                para estimar si tu peso se encuentra dentro de un rango saludable.
+            </p>
 
             <form method="POST">
-
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Peso (kg)</label>
                     <input type="number" step="0.1" name="peso" class="form-control" required>
@@ -25,22 +25,19 @@
                     <input type="number" name="altura" class="form-control" required>
                 </div>
 
-                <div class="text-center">
-                    <button class="btn btn-success px-4">Calcular</button>
+                <div class="text-center mt-3">
+                    <button class="btn btn-success px-4">Calcular IMC</button>
                 </div>
-
             </form>
 
             {% if resultado %}
             <div class="mt-4 card bg-success bg-opacity-25 border-0 p-3">
-                <h5 class="text-success fw-bold text-center">Resultado:</h5>
+                <h5 class="text-success fw-bold text-center">Resultado</h5>
                 <p class="text-center fs-5">{{ resultado }}</p>
+                <p class="text-center text-secondary">{{ info }}</p>
             </div>
             {% endif %}
-
         </div>
-
     </div>
 </div>
-
 {% endblock %}

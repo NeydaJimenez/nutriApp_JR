@@ -1,16 +1,17 @@
 {% extends "base.html" %}
-{% block title %}TMB{% endblock %}
+{% block title %}Calculadora TMB{% endblock %}
 
 {% block content %}
-<div class="container d-flex justify-content-center">
-    <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%; border-radius: 15px;">
-
-        <div class="card-header bg-success bg-opacity-75 text-white text-center fw-bold"
-             style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            Calculadora TMB
+<div class="container d-flex justify-content-center mt-4">
+    <div class="card shadow-lg border-0" style="max-width: 850px; width: 100%; border-radius: 15px;">
+        <div class="card-header bg-success text-white text-center fw-bold">
+            Calculadora de Tasa Metabólica Basal (TMB)
         </div>
 
-        <div class="card-body">
+        <div class="card-body px-5">
+            <p class="text-secondary">
+                La TMB representa la cantidad mínima de energía que tu cuerpo necesita para funcionar en reposo.
+            </p>
 
             <form method="POST">
 
@@ -21,7 +22,7 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Sexo</label>
-                    <select name="sexo" class="form-select" required>
+                    <select name="sexo" class="form-select">
                         <option value="hombre">Hombre</option>
                         <option value="mujer">Mujer</option>
                     </select>
@@ -37,21 +38,19 @@
                     <input type="number" name="altura" class="form-control" required>
                 </div>
 
-                <div class="text-center">
-                    <button class="btn btn-success px-4">Calcular</button>
+                <div class="text-center mt-3">
+                    <button class="btn btn-success px-4">Calcular TMB</button>
                 </div>
-
             </form>
 
             {% if resultado %}
             <div class="mt-4 card bg-success bg-opacity-25 border-0 p-3">
-                <h5 class="text-success fw-bold text-center">Resultado:</h5>
+                <h5 class="text-success fw-bold text-center">Resultado</h5>
                 <p class="text-center fs-5">{{ resultado }}</p>
+                <p class="text-center text-secondary">{{ info }}</p>
             </div>
             {% endif %}
-
         </div>
-
     </div>
 </div>
 {% endblock %}
