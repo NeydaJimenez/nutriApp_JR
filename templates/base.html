@@ -20,7 +20,7 @@
                     <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('index') }}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('datos_nutricionales') }}">Datos Nutricionales</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('analizador_recetas') }}">Analizador de Recetas</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Rutinas</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('rutinas') }}">Rutinas</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="calcDropdown" role="button" data-bs-toggle="dropdown">Calculadoras</a>
                         <ul class="dropdown-menu">
@@ -49,8 +49,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ url_for('registrado') }}">Registrarse</a>
                         </li>
-
-                        
                     {% endif %}
                 </ul>
             </div>

@@ -1,59 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}Rutinas - Nutrify{% endblock %}
+{% block title %}Rutinas de Ejercicio{% endblock %}
 
 {% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Selecciona tu rutina de ejercicio</h1>
 
-<div class="text-center mb-4">
-    <h1 class="fw-bold text-success">Rutinas de Ejercicio</h1>
-    <p class="text-muted fs-5">Selecciona y visualiza tu rutina en formato PDF.</p>
-</div>
+    <div class="row justify-content-center">
 
-<!-- Botones para mostrar pdf -->
-<div class="d-flex justify-content-center mb-4 gap-3">
-    <button class="btn btn-success" onclick="showPDF('/static/rutina_mujer.pdf')">
-        Rutina Mujer
-    </button>
-    <button class="btn btn-dark" onclick="showPDF('/static/rutina_hombre.pdf')">
-        Rutina Hombre
-    </button>
-</div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Rutinas Hombre</h5>
+                    <p class="card-text">Descarga la rutina especialmente diseñada para hombres.</p>
+                    <a href="{{ url_for('static', filename='rutinas_hombre.pdf') }}" class="btn btn-primary" target="_blank">Ver PDF</a>
+                </div>
+            </div>
+        </div>
 
-<!-- Visor PDF -->
-<div class="card shadow-sm mb-4">
-    <div class="card-body p-0">
-        <iframe id="pdfFrame" 
-                src="/static/rutina_mujer.pdf" 
-                style="width:100%; height:80vh; border:0;">
-        </iframe>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Rutinas Mujer</h5>
+                    <p class="card-text">Descarga la rutina especialmente diseñada para mujeres.</p>
+                    <a href="{{ url_for('static', filename='rutinas_mujer.pdf') }}" class="btn btn-success" target="_blank">Ver PDF</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-
-<!-- Descargas -->
-<div class="d-flex justify-content-center gap-3 flex-wrap">
-
-    <a class="btn btn-success" href="/static/rutina_mujer.pdf" download>
-        Descargar Rutina Mujer
-    </a>
-
-    <a class="btn btn-dark" href="/static/rutina_hombre.pdf" download>
-        Descargar Rutina Hombre
-    </a>
-
-    <a class="btn btn-outline-secondary" href="/static/rutina_mujer.pdf" target="_blank">
-        Abrir Mujer en pestaña
-    </a>
-
-    <a class="btn btn-outline-secondary" href="/static/rutina_hombre.pdf" target="_blank">
-        Abrir Hombre en pestaña
-    </a>
-
-</div>
-
-<script>
-function showPDF(file) {
-    document.getElementById("pdfFrame").src = file;
-}
-</script>
-
 {% endblock %}
