@@ -12,7 +12,7 @@ def buscar_alimento(api_key, nombre):
     params = {
         "api_key": api_key,
         "query": nombre,
-        "pageSize": 1
+        "pageSize": 1   
     }
 
     r = requests.get(url, params=params)
