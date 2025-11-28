@@ -13,7 +13,12 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">Rutinas Hombre</h5>
                     <p class="card-text">Descarga la rutina especialmente diseñada para hombres.</p>
-                    <a href="{{ url_for('static', filename='rutinas_hombre.pdf') }}" class="btn btn-primary" target="_blank">Ver PDF</a>
+
+                    {% if 'nombre' in session %}
+                        <a href="{{ url_for('rutinas_hombre_pdf') }}" class="btn btn-primary">Ver PDF</a>
+                    {% else %}
+                        <a href="{{ url_for('registrado') }}" class="btn btn-warning">Inicia sesión para descargar</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -23,11 +28,17 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">Rutinas Mujer</h5>
                     <p class="card-text">Descarga la rutina especialmente diseñada para mujeres.</p>
-                    <a href="{{ url_for('static', filename='rutinas_mujer.pdf') }}" class="btn btn-success" target="_blank">Ver PDF</a>
+
+                    {% if 'nombre' in session %}
+                        <a href="{{ url_for('rutinas_mujer_pdf') }}" class="btn btn-success">Ver PDF</a>
+                    {% else %}
+                        <a href="{{ url_for('registrado') }}" class="btn btn-warning">Inicia sesión para descargar</a>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
 
     </div>
 </div>
-{% endblock %}  
+{% endblock %}
