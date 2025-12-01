@@ -6,7 +6,6 @@ app.secret_key = "nutriapp2025"
 
 API_KEY = "GtT9BVfZt3IAs6emnD24WO6ITAE7gzi4Grxq8VvO"
 
-# Función para buscar alimento en la API USDA
 def buscar_alimento(api_key, nombre):
     url = "https://api.nal.usda.gov/fdc/v1/foods/search"
     params = {
@@ -27,8 +26,6 @@ def buscar_alimento(api_key, nombre):
         "carbs": nutrients.get("Carbohydrate, by difference", 0),
         "fats": nutrients.get("Total lipid (fat)", 0)
     }
-
-# ---------------- RUTAS PRINCIPALES ----------------
 
 @app.route('/')
 def index():
@@ -62,10 +59,10 @@ def logout():
 def datos_nutricionales():
     return render_template('datos_nutricionales.html')
 
-# ---------------- CALCULADORAS ----------------
-
 @app.route('/calculadora/imc', methods=['GET', 'POST'])
 def calculadora_imc():
+    if 'nombre' not in session:
+        return redirect(url_for('registrado'))
     resultado = None
     if request.method == 'POST':
         try:
@@ -79,6 +76,8 @@ def calculadora_imc():
 
 @app.route('/calculadora/tmb', methods=['GET', 'POST'])
 def calculadora_tmb():
+    if 'nombre' not in session:
+        return redirect(url_for('registrado'))
     resultado = None
     if request.method == 'POST':
         try:
@@ -97,6 +96,8 @@ def calculadora_tmb():
 
 @app.route('/calculadora/gct', methods=['GET', 'POST'])
 def calculadora_gct():
+    if 'nombre' not in session:
+        return redirect(url_for('registrado'))
     resultado = None
     if request.method == 'POST':
         try:
@@ -110,6 +111,8 @@ def calculadora_gct():
 
 @app.route('/calculadora/pesoideal', methods=['GET', 'POST'])
 def calculadora_pesoideal():
+    if 'nombre' not in session:
+        return redirect(url_for('registrado'))
     resultado = None
     if request.method == 'POST':
         try:
@@ -127,6 +130,8 @@ def calculadora_pesoideal():
 
 @app.route('/calculadora/macronutrientes', methods=['GET', 'POST'])
 def calculadora_macronutrientes():
+    if 'nombre' not in session:
+        return redirect(url_for('registrado'))
     resultado = None
     if request.method == 'POST':
         try:
@@ -146,8 +151,6 @@ def calculadora_macronutrientes():
             resultado = "Ingresa un número válido."
     return render_template('calculadora_macronutrientes.html', resultado=resultado)
 
-# ---------------- RUTINAS ----------------
-
 @app.route("/rutinas")
 def rutinas():
     return render_template("rutinas.html")
@@ -164,11 +167,8 @@ def rutinas_mujer_pdf():
         return redirect(url_for('registrado'))
     return send_from_directory('static/pdf', 'rutinas_mujer.pdf')
 
-# ---------------- ANALIZADOR DE RECETAS ----------------
-
 @app.route('/analizador_recetas', methods=['GET', 'POST'])
 def analizador_recetas():
-
     food_data = {
         "Carne de Res": {"proteins": 26, "carbs": 0, "fats": 20},
         "Tocino": {"proteins": 12, "carbs": 1, "fats": 35},
@@ -191,7 +191,6 @@ def analizador_recetas():
         "Huevo": {"proteins": 6.3, "carbs": 0.4, "fats": 5},
         "Pescado": {"proteins": 20, "carbs": 0, "fats": 5},
     }
-
     recipes = {
         "Discada": ["Carne de Res", "Tocino", "Papas", "Zanahorias",
                     "Cebolla", "Pimientos", "Tomate", "Aceite de Oliva"],
@@ -201,12 +200,10 @@ def analizador_recetas():
                        "Tomate", "Cebolla", "Aceite de Oliva"],
         "Pescado": ["Pescado", "Limón", "Aceite de Oliva", "Ajo", "Perejil"]
     }
-
     total_proteins = total_carbs = total_fats = 0
     ingredient_data = []
     health_status = ""
     recipe_name = None
-
     if request.method == 'POST':
         recipe_name = request.form.get('recipe')
         if not recipe_name or recipe_name not in recipes:
@@ -249,6 +246,5 @@ def analizador_recetas():
                                recipes=recipes)
     return render_template('analizador_recetas.html', recipes=recipes)
 
-# ---------------- RUN APP ----------------
 if __name__ == '__main__':
     app.run(debug=True)
