@@ -1,10 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 import requests
-
+import pymysql
 app = Flask(__name__)
 app.secret_key = "nutriapp2025"
 
 API_KEY = "GtT9BVfZt3IAs6emnD24WO6ITAE7gzi4Grxq8VvO"
+
+def get_db_connection():
+    connection = pymysql.connect(
+        host="localhost",
+        user="root", 
+        password="",  
+        database="nutrify_db",
+        cursorclass=pymysql.cursors.DictCursor
+    )
+    return connection
 
 def buscar_alimento(api_key, nombre):
     url = "https://api.nal.usda.gov/fdc/v1/foods/search"
@@ -35,6 +45,7 @@ def registrado():
             'email', 'password', 'objetivo', 'alergias', 'intolerancias',
             'dieta', 'no_gusta', 'experiencia'
         ]
+        
         for campo in campos:
             session[campo] = request.form.get(campo, "")
         return redirect(url_for('index'))
@@ -51,7 +62,7 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-@app.route('/datos-nutricionales') 
+@app.route('/datos_nutricionales') 
 def datos_nutricionales(): 
     return render_template('datos_nutricionales.html')
 
