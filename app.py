@@ -8,11 +8,7 @@ API_KEY = "GtT9BVfZt3IAs6emnD24WO6ITAE7gzi4Grxq8VvO"
 
 def buscar_alimento(api_key, nombre):
     url = "https://api.nal.usda.gov/fdc/v1/foods/search"
-    params = {
-        "api_key": api_key,
-        "query": nombre,
-        "pageSize": 1
-    }
+    params = {"api_key": api_key, "query": nombre, "pageSize": 1}
     r = requests.get(url, params=params)
     if r.status_code != 200:
         return None
@@ -55,101 +51,126 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-@app.route('/datos-nutricionales')
-def datos_nutricionales():
+@app.route('/datos-nutricionales') 
+def datos_nutricionales(): 
     return render_template('datos_nutricionales.html')
 
 @app.route('/calculadora/imc', methods=['GET', 'POST'])
 def calculadora_imc():
-    if 'nombre' not in session:
-        return redirect(url_for('registrado'))
     resultado = None
-    if request.method == 'POST':
+    info = None
+
+    if request.method == 'POST' and 'nombre' in session:
         try:
             peso = float(request.form['peso'])
             altura = float(request.form['altura']) / 100
             imc = peso / (altura ** 2)
             resultado = f"Tu IMC es {imc:.2f}"
+
+            if imc < 18.5:
+                info = "Bajo peso: podrías necesitar aumentar masa muscular."
+            elif 18.5 <= imc < 24.9:
+                info = "Peso normal: ¡Excelente! Mantén tus buenos hábitos."
+            elif 25 <= imc < 29.9:
+                info = "Sobrepeso: podrías beneficiarte de una dieta equilibrada."
+            else:
+                info = "Obesidad: considera buscar apoyo nutricional."
         except:
             resultado = "Por favor llena todos los campos correctamente."
-    return render_template('calculadora_IMC.html', resultado=resultado)
+
+    return render_template('calculadora_IMC.html', resultado=resultado, info=info)
 
 @app.route('/calculadora/tmb', methods=['GET', 'POST'])
 def calculadora_tmb():
-    if 'nombre' not in session:
-        return redirect(url_for('registrado'))
     resultado = None
-    if request.method == 'POST':
+    info = None
+
+    if request.method == 'POST' and 'nombre' in session:
         try:
             edad = int(request.form['edad'])
             sexo = request.form['sexo']
             peso = float(request.form['peso'])
             altura = float(request.form['altura'])
+
             if sexo == "hombre":
                 tmb = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * edad)
             else:
                 tmb = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * edad)
+
             resultado = f"Tu TMB es {tmb:.2f} calorías/día"
+            info = "Este valor representa cuántas calorías quemas en reposo."
         except:
             resultado = "Completa correctamente todos los campos."
-    return render_template('calculadora_TMB.html', resultado=resultado)
+
+    return render_template('calculadora_TMB.html', resultado=resultado, info=info)
 
 @app.route('/calculadora/gct', methods=['GET', 'POST'])
 def calculadora_gct():
-    if 'nombre' not in session:
-        return redirect(url_for('registrado'))
     resultado = None
-    if request.method == 'POST':
+    info = None
+
+    if request.method == 'POST' and 'nombre' in session:
         try:
             tmb = float(request.form['tmb'])
             actividad = float(request.form['actividad'])
             gct = tmb * actividad
             resultado = f"Tu gasto calórico total es {gct:.2f} calorías/día"
+            info = "Estas son las calorías que quemas en un día normal."
         except:
             resultado = "Completa los datos correctamente."
-    return render_template('calculadora_GCT.html', resultado=resultado)
+
+    return render_template('calculadora_GCT.html', resultado=resultado, info=info)
 
 @app.route('/calculadora/pesoideal', methods=['GET', 'POST'])
 def calculadora_pesoideal():
-    if 'nombre' not in session:
-        return redirect(url_for('registrado'))
     resultado = None
-    if request.method == 'POST':
+    info = None
+
+    if request.method == 'POST' and 'nombre' in session:
         try:
             altura = float(request.form['altura'])
             sexo = request.form['sexo']
             altura_m = altura / 2.54
+
             if sexo == "hombre":
                 ideal = 50 + 2.3 * (altura_m - 60)
             else:
                 ideal = 45.5 + 2.3 * (altura_m - 60)
+
             resultado = f"Tu peso ideal aproximado es {ideal:.2f} kg"
+            info = "El peso ideal es solo una referencia, cada cuerpo es diferente."
         except:
             resultado = "Llena los campos correctamente."
-    return render_template('calculadora_pesoideal.html', resultado=resultado)
+
+    return render_template('calculadora_pesoideal.html', resultado=resultado, info=info)
 
 @app.route('/calculadora/macronutrientes', methods=['GET', 'POST'])
 def calculadora_macronutrientes():
-    if 'nombre' not in session:
-        return redirect(url_for('registrado'))
     resultado = None
-    if request.method == 'POST':
+    info = None
+
+    if request.method == 'POST' and 'nombre' in session:
         try:
             calorias = float(request.form['calorias'])
             objetivo = request.form['objetivo']
+
             if objetivo == "perder":
                 p, g, c = 0.40, 0.30, 0.30
             elif objetivo == "mantener":
                 p, g, c = 0.30, 0.30, 0.40
             else:
                 p, g, c = 0.30, 0.25, 0.45
+
             prot = calorias * p / 4
             gras = calorias * g / 9
             carb = calorias * c / 4
+
             resultado = f"Proteínas: {prot:.0f} g | Grasas: {gras:.0f} g | Carbohidratos: {carb:.0f} g"
+            info = "Estos valores son ideales según tu objetivo."
         except:
             resultado = "Ingresa un número válido."
-    return render_template('calculadora_macronutrientes.html', resultado=resultado)
+
+    return render_template('calculadora_macronutrientes.html', resultado=resultado, info=info)
 
 @app.route("/rutinas")
 def rutinas():
@@ -157,18 +178,22 @@ def rutinas():
 
 @app.route('/rutinas/hombre')
 def rutinas_hombre_pdf():
-    if 'nombre' not in session:
-        return redirect(url_for('registrado'))
-    return send_from_directory('static/pdf', 'rutinas_hombre.pdf')
+    if 'nombre' not in session or session['nombre'] == "":
+        return render_template("login_requerido.html")
+    return send_from_directory('static/pdf', 'rutinas_hombre.pdf', as_attachment=True)
 
 @app.route('/rutinas/mujer')
 def rutinas_mujer_pdf():
-    if 'nombre' not in session:
-        return redirect(url_for('registrado'))
-    return send_from_directory('static/pdf', 'rutinas_mujer.pdf')
+    if 'nombre' not in session or session['nombre'] == "":
+        return render_template("login_requerido.html")
+    return send_from_directory('static/pdf', 'rutinas_mujer.pdf', as_attachment=True)
+
 
 @app.route('/analizador_recetas', methods=['GET', 'POST'])
 def analizador_recetas():
+    if 'nombre' not in session:
+        return redirect(url_for('registrado'))
+
     food_data = {
         "Carne de Res": {"proteins": 26, "carbs": 0, "fats": 20},
         "Tocino": {"proteins": 12, "carbs": 1, "fats": 35},
@@ -191,6 +216,7 @@ def analizador_recetas():
         "Huevo": {"proteins": 6.3, "carbs": 0.4, "fats": 5},
         "Pescado": {"proteins": 20, "carbs": 0, "fats": 5},
     }
+
     recipes = {
         "Discada": ["Carne de Res", "Tocino", "Papas", "Zanahorias",
                     "Cebolla", "Pimientos", "Tomate", "Aceite de Oliva"],
@@ -200,50 +226,70 @@ def analizador_recetas():
                        "Tomate", "Cebolla", "Aceite de Oliva"],
         "Pescado": ["Pescado", "Limón", "Aceite de Oliva", "Ajo", "Perejil"]
     }
+
     total_proteins = total_carbs = total_fats = 0
     ingredient_data = []
     health_status = ""
     recipe_name = None
+
     if request.method == 'POST':
         recipe_name = request.form.get('recipe')
+
         if not recipe_name or recipe_name not in recipes:
             return render_template('analizador_recetas.html', recipes=recipes, error="Debes seleccionar una receta válida.")
+
         quantities = request.form.getlist('quantities')
-        if not quantities or any(q.strip() == "" for q in quantities):
-            return render_template('analizador_recetas.html', recipes=recipes, recipe_name=recipe_name, error="Debes ingresar todas las cantidades.")
         ingredients = recipes[recipe_name]
+
+        if len(quantities) != len(ingredients):
+            return render_template('analizador_recetas.html', recipes=recipes, recipe_name=recipe_name, error="Debes ingresar todas las cantidades.")
+
         for ingredient, quantity in zip(ingredients, quantities):
             try:
                 quantity = float(quantity)
             except:
                 quantity = 0
-            api_data = buscar_alimento(API_KEY, ingredient)
-            data = api_data if api_data else food_data.get(ingredient, {"proteins":0,"carbs":0,"fats":0})
+
+            data = food_data.get(ingredient, {"proteins":0,"carbs":0,"fats":0})
             protein = (data['proteins'] * quantity) / 100
             carbs = (data['carbs'] * quantity) / 100
             fats = (data['fats'] * quantity) / 100
-            ingredient_data.append({'ingredient':ingredient,'quantity':quantity,'protein':round(protein,2),'carbs':round(carbs,2),'fats':round(fats,2)})
+
+            ingredient_data.append({
+                'ingredient': ingredient,
+                'quantity': quantity,
+                'protein': round(protein, 2),
+                'carbs': round(carbs, 2),
+                'fats': round(fats, 2)
+            })
+
             total_proteins += protein
             total_carbs += carbs
             total_fats += fats
+
         try:
             health_score = total_proteins / (total_carbs + total_fats)
         except:
             health_score = 0
+
         if health_score > 0.4:
             health_status = "¡Receta saludable!"
         elif health_score > 0.2:
             health_status = "Receta balanceada."
         else:
             health_status = "Receta alta en carbohidratos o grasas."
-        return render_template('analizador_recetas.html',
-                               ingredient_data=ingredient_data,
-                               total_proteins=round(total_proteins,2),
-                               total_carbs=round(total_carbs,2),
-                               total_fats=round(total_fats,2),
-                               health_status=health_status,
-                               recipe_name=recipe_name,
-                               recipes=recipes)
+
+        return render_template(
+            'analizador_recetas.html',
+            ingredient_data=ingredient_data,
+            total_proteins=round(total_proteins, 2),
+            total_carbs=round(total_carbs, 2),
+            total_fats=round(total_fats, 2),
+            health_status=health_status,
+            recipe_name=recipe_name,
+            recipes=recipes
+        )
+
     return render_template('analizador_recetas.html', recipes=recipes)
 
 if __name__ == '__main__':

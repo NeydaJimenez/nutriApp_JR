@@ -3,25 +3,19 @@
 
 {% block content %}
 <div class="container d-flex justify-content-center mt-4">
-    <div class="card shadow-lg border-0" style="max-width: 850px; width: 100%; border-radius: 15px;">
-        <div class="card-header bg-success text-white text-center fw-bold">
-            Calculadora de Gasto Calórico Total (GCT)
+    {% if 'nombre' not in session %}
+        <div class="text-center mt-5">
+            <h3 class="text-danger mb-4">Debes iniciar sesión para usar la Calculadora GCT</h3>
+            <a href="{{ url_for('registrado') }}" class="btn btn-warning btn-lg">Iniciar sesión / Registrarse</a>
         </div>
-
+    {% else %}
+    <div class="card shadow-lg border-0" style="max-width: 850px; width: 100%; border-radius: 15px;">
+        <div class="card-header bg-success text-white text-center fw-bold">Calculadora de GCT</div>
         <div class="card-body px-5">
-            <p class="text-secondary">
-                El Gasto Calórico Total es la energía total que quemas al día considerando tu actividad física.
-            </p>
-
+            <p class="text-secondary">El Gasto Calórico Total es la energía que quemas al día considerando tu actividad física.</p>
             <form method="POST">
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">TMB (calorías)</label>
-                    <input type="number" step="0.1" name="tmb" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Nivel de Actividad</label>
+                <div class="mb-3"><label class="form-label fw-semibold">TMB (calorías)</label><input type="number" step="0.1" name="tmb" class="form-control" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Nivel de Actividad</label>
                     <select name="actividad" class="form-select">
                         <option value="1.2">Sedentario</option>
                         <option value="1.375">Ligera</option>
@@ -30,12 +24,8 @@
                         <option value="1.9">Muy intensa</option>
                     </select>
                 </div>
-
-                <div class="text-center mt-3">
-                    <button class="btn btn-success px-4">Calcular GCT</button>
-                </div>
+                <div class="text-center mt-3"><button class="btn btn-success px-4">Calcular GCT</button></div>
             </form>
-
             {% if resultado %}
             <div class="mt-4 card bg-success bg-opacity-25 border-0 p-3">
                 <h5 class="text-success fw-bold text-center">Resultado</h5>
@@ -45,5 +35,6 @@
             {% endif %}
         </div>
     </div>
+    {% endif %}
 </div>
-{% endblock %}   
+{% endblock %}

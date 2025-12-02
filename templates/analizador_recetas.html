@@ -1,72 +1,73 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-center mb-4">Analizador de Recetas</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Analizador de Recetas</h1>
 
-<form method="POST" class="card p-4 shadow-sm bg-light">
-    
-    <div class="mb-3">
-        <label for="recipe" class="form-label">Selecciona un Platillo</label>
-        <select class="form-control" name="recipe" required onchange="this.form.submit()">
-            <option value="" disabled selected>Selecciona un platillo</option>
-            {% for recipe in recipes %}
-                <option value="{{ recipe }}"
-                    {% if recipe == recipe_name %} selected {% endif %}>
-                    {{ recipe }}
-                </option>
-            {% endfor %}
-        </select>
-    </div>
+    {% if 'nombre' not in session %}
+        <div class="alert alert-warning text-center">
+            Debes <a href="{{ url_for('registrado') }}" class="fw-bold">iniciar sesión</a> para usar el Analizador de Recetas.
+        </div>
+    {% else %}
+        <form method="POST" class="card p-4 shadow-sm bg-light">
+            <div class="mb-3">
+                <label for="recipe" class="form-label">Selecciona un Platillo</label>
+                <select class="form-control" name="recipe" required onchange="this.form.submit()">
+                    <option value="" disabled selected>Selecciona un platillo</option>
+                    {% for recipe in recipes %}
+                        <option value="{{ recipe }}" {% if recipe == recipe_name %} selected {% endif %}>
+                            {{ recipe }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Cantidad (en gramos) por ingrediente</label>
+            {% if recipe_name %}
+                <div class="mb-3">
+                    <label class="form-label">Cantidad (en gramos) por ingrediente</label>
+                    {% for ing in recipes[recipe_name] %}
+                        <label class="mt-2 fw-bold">{{ ing }}</label>
+                        <input type="number" class="form-control" name="quantities"
+                               placeholder="Cantidad en gramos" required>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-        {% if recipe_name %}
-            {% for ing in recipes[recipe_name] %}
-                <label class="mt-2 fw-bold">{{ ing }}</label>
-                <input type="number" class="form-control" name="quantities"
-                       placeholder="Cantidad en gramos">
-            {% endfor %}
-        {% else %}
-            <input type="text" class="form-control" name="quantities"
-                   placeholder="Ej. 100, 200, 50" required>
+            <button type="submit" class="btn btn-primary w-100 mt-3">Analizar</button>
+        </form>
+
+        {% if ingredient_data %}
+            <h2 class="mt-5">Ingredientes Añadidos para {{ recipe_name }}</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Ingrediente</th>
+                        <th>Cantidad (g)</th>
+                        <th>Proteínas (g)</th>
+                        <th>Carbohidratos (g)</th>
+                        <th>Grasas (g)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in ingredient_data %}
+                        <tr>
+                            <td>{{ item.ingredient }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.protein }}</td>
+                            <td>{{ item.carbs }}</td>
+                            <td>{{ item.fats }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3 class="mt-4">Análisis de la Receta</h3>
+            <p><strong>Proteínas Totales:</strong> {{ total_proteins }} g</p>
+            <p><strong>Carbohidratos Totales:</strong> {{ total_carbs }} g</p>
+            <p><strong>Grasas Totales:</strong> {{ total_fats }} g</p>
+            <p><strong>Evaluación de la Receta:</strong> {{ health_status }}</p>
         {% endif %}
-    </div>
-
-    <button type="submit" class="btn btn-primary w-100">Analizar</button>
-</form>
-
-{% if ingredient_data %}
-    <h2 class="mt-5">Ingredientes Añadidos para {{ recipe_name }}</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Ingrediente</th>
-                <th>Cantidad (g)</th>
-                <th>Proteínas (g)</th>
-                <th>Carbohidratos (g)</th>
-                <th>Grasas (g)</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in ingredient_data %}
-                <tr>
-                    <td>{{ item.ingredient }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.protein }}</td>
-                    <td>{{ item.carbs }}</td>
-                    <td>{{ item.fats }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <h3>Análisis de la Receta</h3>
-    <p><strong>Proteínas Totales:</strong> {{ total_proteins }} g</p>
-    <p><strong>Carbohidratos Totales:</strong> {{ total_carbs }} g</p>
-    <p><strong>Grasas Totales:</strong> {{ total_fats }} g</p>
-    <p><strong>Evaluación de la Receta:</strong> {{ health_status }}</p>
-{% endif %}
-
+    {% endif %}
+</div>
 {% endblock %}
     
